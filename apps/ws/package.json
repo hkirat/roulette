@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "tsc -b"
   },
   "keywords": [],
   "author": "",
@@ -11,6 +11,8 @@
   "description": "",
   "dependencies": {
     "@types/ws": "^8.5.13",
-    "ws": "^8.18.0"
+    "ws": "^8.18.0",
+    "@repo/common": "workspace:*",
+    "@repo/typescript-config": "workspace:*"
   }
 }

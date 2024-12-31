@@ -25,12 +25,24 @@ export class GameManager {
         return false
     }
 
+    // admin will call this
     public start() {
         this.state = GameState.CanBet;
+        UserManager.getInstance().broadcast({
+            type: "start-game",
+        });
+    }
+
+    stopBets() {
+        this.state = GameState.CantBet;
+        UserManager.getInstance().broadcast({
+            type: "stop-bets",
+        });
     }
 
     public end(output: Number) {
         this._lastWinner = output;
+        console.log(this.bets);
         this.bets.forEach(bet => {
             if (bet.number === output) {
                 UserManager.getInstance().won(bet.id, bet.amount, output);
@@ -38,6 +50,10 @@ export class GameManager {
                 UserManager.getInstance().lost(bet.id, bet.amount, output);
             }
         });
+
+        this.state = GameState.GameOver;
+        this._lastWinner = output;
+        UserManager.getInstance().flush(output);
     }
 
 }

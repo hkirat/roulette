@@ -3,16 +3,19 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "build": "tsc -b"
+    "build": "esbuild src/index.ts --platform=node --bundle --outdir=dist",
+    "dev": "npm run build && node dist/index.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "@types/ws": "^8.5.13",
-    "ws": "^8.18.0",
     "@repo/common": "workspace:*",
-    "@repo/typescript-config": "workspace:*"
+    "@repo/typescript-config": "workspace:*",
+    "@types/ws": "^8.5.13",
+    "dotenv": "^16.4.7",
+    "esbuild": "^0.24.2",
+    "ws": "^8.18.0"
   }
 }

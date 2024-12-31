@@ -5,7 +5,22 @@ import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 
 export function Admin() {
-    const {socket, loading} = useSocket("123123");
+  const [password, setPassword] = useState("");
+  const [submitted, setSubmitted] = useState(false);
+
+  if (!submitted) {
+    return <div>
+      hi there
+      <input type="text" onChange={e => setPassword(e.target.value)}></input>
+      <button onClick={() => setSubmitted(true)}>Submit</button>
+    </div>
+  }
+
+  return <AdminMain password={password} />
+}
+
+export function AdminMain({password}: {password: string}) {
+    const {socket, loading} = useSocket(password);
 
     const numbers: Number[] = Array.from({ length: 37 }, (_, i) => i);
     const redNumbers = [1, 3, 5, 7, 9, 12, 14, 16, 18, 19, 21, 23, 25, 27, 30, 32, 34, 36];
